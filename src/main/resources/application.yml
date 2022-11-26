@@ -1,7 +1,28 @@
 server:
-  port: 80
+    port: 80
 
 spring:
-  application:
-    name: demo
+    application:
+        name: demo
+    sql:
+        init:
+            schema-locations: classpath:demo.sql
+    datasource:
+        url: jdbc:h2:~/demo
+        driver-class-name: org.h2.Driver
+        username: sa
+        password: 123456
+    h2:
+        console:
+            enabled: true
+            path: /h2
+            settings:
+                web-allow-others: true
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        show-sql: true
+    security:
+        user:
+            name: admin
+            password: 123456
 
