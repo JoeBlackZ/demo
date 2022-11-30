@@ -10,9 +10,7 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
-
         log.info("This is a test.");
-
     }
 
 }

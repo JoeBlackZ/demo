@@ -6,9 +6,11 @@ spring:
         name: demo
     sql:
         init:
-            schema-locations: classpath:demo.sql
+            schema-locations: classpath:demo-schema.sql
+            data-locations: classpath:demo-data.sql
+            mode: always
     datasource:
-        url: jdbc:h2:~/demo
+        url: jdbc:h2:./demo
         driver-class-name: org.h2.Driver
         username: sa
         password: 123456
@@ -21,6 +23,7 @@ spring:
     jpa:
         database-platform: org.hibernate.dialect.H2Dialect
         show-sql: true
+        open-in-view: false
     security:
         user:
             name: admin
