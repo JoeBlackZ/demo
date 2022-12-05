@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserService {
 
-    ResponseEntity<List<SysUser>> users();
+    ResponseEntity<List<SysUser>> users(SysUser sysUser);
+
+    ResponseEntity<SysUser> user(Integer id);
 
 }
