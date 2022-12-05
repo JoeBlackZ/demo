@@ -1,18 +1,23 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.User;
+import com.example.demo.model.SysUser;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Resource
+    private UserRepository userRepository;
+
     @Override
-    public ResponseEntity<List<User>> users() {
-        return ResponseEntity.ok(Collections.emptyList());
+    public ResponseEntity<List<SysUser>> users() {
+        List<SysUser> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
     }
 }
