@@ -13,14 +13,14 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "sys_user")
+public class SysUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String password;
+    private String pwd;
     private String phone;
     private Date createDate;
 

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
+import com.example.demo.model.SysUser;
 import com.example.demo.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ public class MainController {
     @Resource
     private UserService userService;
 
-    @GetMapping("test")
-    public ResponseEntity<List<User>> main() {
+    @GetMapping("user")
+    public ResponseEntity<List<SysUser>> main() {
         return this.userService.users();
     }
 
