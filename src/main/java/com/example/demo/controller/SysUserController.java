@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author zhangqi
+ */
 @RestController
 @RequestMapping("/")
 public class SysUserController {
