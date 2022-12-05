@@ -2,6 +2,8 @@ package com.example.demo;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
@@ -13,10 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Sets;
 import org.assertj.core.util.TextFileWriter;
 import org.junit.jupiter.api.Test;
-import org.xbill.DNS.Lookup;
-import org.xbill.DNS.Record;
-import org.xbill.DNS.TextParseException;
-import org.xbill.DNS.Type;
 
 @Slf4j
 public class NsLookUpTest {
@@ -119,7 +117,7 @@ public class NsLookUpTest {
         hosts.add("nodeclipse.github.io");
         hosts.add("jamling.github.io");
         hosts.add("download.eclipse.org");
-        System.out.println("====域名解析开始(采样次数:" + count + ").....");
+        log.info("====域名解析开始(采样次数:{})", count);
         Stream.iterate(1, i -> i + 1).limit(count).forEach(j -> {
             try {
                 for (String host : hosts) {
@@ -128,11 +126,9 @@ public class NsLookUpTest {
                         hostIPs.put(host, Sets.newLinkedHashSet());
                     }
                     hostIPs.get(host).addAll(ips);
-                    System.out.println(host);
-                    System.out.println(String.join("\n", ips));
-                    System.out.println();
+                    log.info("{}\n{}\n", host, String.join("\n", ips));
                 }
-                System.out.println("====域名解析:已完成第" + j + "/" + count + "次采样");
+                log.info("域名解析:已完成第{}/{}次采样", j, count);
                 if (j < count) {
                     Thread.sleep(30 * 1000L);
                 }
@@ -151,18 +147,12 @@ public class NsLookUpTest {
         System.out.println(builder);
     }
 
-    private Set<String> hostToIps(String host) throws TextParseException {
+    private Set<String> hostToIps(String host) throws UnknownHostException {
         Set<String> ips = Sets.newTreeSet();
         //查询域名对应的IP地址
-        Lookup lookup = new Lookup(host, Type.A);
-        Record[] answers = lookup.run();
-        if (lookup.getResult() != Lookup.SUCCESSFUL) {
-            System.out.println("[" + host + "] LOOKUP ERROR: " + lookup.getErrorString());
-            return ips;
-        }
-        for (Record rec : answers) {
-            String ip = rec.rdataToString();
-            ips.add(ip);
+        InetAddress[] addresses = InetAddress.getAllByName(host);
+        for (InetAddress inetAddress : addresses) {
+            ips.add(inetAddress.getHostAddress());
         }
         return ips;
     }

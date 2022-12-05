@@ -7,7 +7,11 @@ import java.util.List;
 
 public interface UserService {
 
-    ResponseEntity<List<SysUser>> users(SysUser sysUser);
+    ResponseEntity<Integer> saveUser(SysUser user);
+
+    ResponseEntity<Boolean> removeUser(Integer id);
+
+    ResponseEntity<List<SysUser>> users(SysUser user);
 
     ResponseEntity<SysUser> user(Integer id);
 

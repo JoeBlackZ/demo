@@ -4,10 +4,7 @@ import com.example.demo.model.SysUser;
 import com.example.demo.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +14,11 @@ public class SysUserController {
 
     @Resource
     private UserService userService;
+
+    @PutMapping("user")
+    public ResponseEntity<Integer> saveSysUser(SysUser sysUser) {
+        return this.userService.saveUser(sysUser);
+    }
 
     @GetMapping("user")
     public ResponseEntity<List<SysUser>> sysUser(SysUser sysUser) {
