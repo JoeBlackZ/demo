@@ -24,6 +24,9 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     open-in-view: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   security:
     user:
       name: admin
