@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  nexus:
+    image: sonatype/nexus3:3.43.0
+    restart: always
+    ports:
+      - 8081:8081
+    volumes:
+      - /opt/deploy/nexus/nexus-data:/nexus-data
