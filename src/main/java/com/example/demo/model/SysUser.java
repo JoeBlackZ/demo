@@ -20,11 +20,20 @@ import java.util.Date;
 public class SysUser {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "pwd")
     private String pwd;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "create_date")
     private Date createDate;
 
 }

@@ -11,7 +11,6 @@ import java.util.List;
 @Slf4j
 @SpringBootTest
 public class UserRepositoryTest {
-
     @Resource
     private UserRepository userRepository;
 
@@ -19,6 +18,12 @@ public class UserRepositoryTest {
     void testList() {
         List<SysUser> users = this.userRepository.findAll();
         log.info(String.valueOf(users));
+    }
+
+    @Test
+    void testFindByName() {
+        SysUser sysUser = this.userRepository.findByName("admin");
+        log.info(String.valueOf(sysUser));
     }
 
 }
