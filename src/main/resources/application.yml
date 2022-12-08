@@ -10,7 +10,7 @@ spring:
       data-locations: classpath:demo-data.sql
       mode: always
   datasource:
-    url: jdbc:h2:./demo
+    url: jdbc:h2:./h2/demo
     driver-class-name: org.h2.Driver
     username: sa
     password: 123456
