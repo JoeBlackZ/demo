@@ -11,10 +11,11 @@ public interface UserRepository extends JpaRepository<SysUser, Integer> {
 
     /**
      * Find sysUser by name
-     *
+     * 
      * @param sysUserName sysUserName
      * @return sysUser
      */
     @Query(value = "SELECT * FROM sys_user WHERE name =:sysUserName", nativeQuery = true)
     SysUser findByName(String sysUserName);
+    
 }

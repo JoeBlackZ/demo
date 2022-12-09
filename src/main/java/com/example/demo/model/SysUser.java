@@ -26,7 +26,7 @@ public class SysUser {
 
     @Column(name = "name")
     private String name;
-
+    
     @Column(name = "pwd")
     private String pwd;
 

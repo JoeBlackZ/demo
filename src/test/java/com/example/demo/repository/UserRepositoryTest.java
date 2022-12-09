@@ -13,7 +13,6 @@ import java.util.Map;
 @Slf4j
 @SpringBootTest
 public class UserRepositoryTest {
-
     @Resource
     private UserRepository userRepository;
 
