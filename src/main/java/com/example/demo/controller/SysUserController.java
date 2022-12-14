@@ -12,25 +12,30 @@ import java.util.List;
  * @author zhangqi
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
 public class SysUserController {
 
     @Resource
     private UserService userService;
 
-    @PutMapping("user")
+    @PutMapping()
     public ResponseEntity<Integer> saveSysUser(SysUser sysUser) {
         return this.userService.saveUser(sysUser);
     }
 
-    @GetMapping("user")
+    @GetMapping()
     public ResponseEntity<List<SysUser>> sysUser(SysUser sysUser) {
         return this.userService.users(sysUser);
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<SysUser> sysUserById(@PathVariable Integer id) {
         return this.userService.user(id);
+    }
+
+    @GetMapping("msg/{id}")
+    public void msgSend(@PathVariable Integer id) {
+        this.userService.sendUserMsg(id);
     }
 
 }
