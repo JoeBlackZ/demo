@@ -38,4 +38,11 @@ public interface UserService {
      */
     ResponseEntity<SysUser> user(Integer id);
 
+
+    /**
+     * Send user a message
+     * @param id the user id
+     */
+    void sendUserMsg(Integer id);
+
 }

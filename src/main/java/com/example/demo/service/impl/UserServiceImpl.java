@@ -4,17 +4,21 @@ import com.example.demo.model.SysUser;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhangqi
  */
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -49,5 +53,23 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<SysUser> user(Integer id) {
         Optional<SysUser> optionalSysUser = this.userRepository.findById(id);
         return optionalSysUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @Async
+    @Override
+    public void sendUserMsg(Integer id) {
+        Optional<SysUser> optionalSysUser = this.userRepository.findById(id);
+        if (optionalSysUser.isEmpty()) {
+            log.error("SysUser doesn't exist.");
+            return;
+        }
+        SysUser sysUser = optionalSysUser.get();
+        String phone = sysUser.getPhone();
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("Send message to {} successfully", phone);
     }
 }
