@@ -25,7 +25,7 @@ public class NsLookUpTest {
         StringBuilder builder = new StringBuilder();
         Map<String, Set<String>> hostIPs = new HashMap<>(256);
         Set<String> hosts = Sets.newLinkedHashSet();
-        int count = 1;
+        int count = 50;
 //		hosts.add("deskcloud-xa.hollysys.net");
         hosts.add("rhc.sonatype.com");
         // Docker Repositories
@@ -119,6 +119,7 @@ public class NsLookUpTest {
         hosts.add("download.eclipse.org");
         log.info("====域名解析开始(采样次数:{})", count);
         Stream.iterate(1, i -> i + 1).limit(count).forEach(j -> {
+            System.out.println("testok");
             try {
                 for (String host : hosts) {
                     Set<String> ips = hostToIps(host);
